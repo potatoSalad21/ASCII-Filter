@@ -5,6 +5,10 @@
 
 using namespace cv;
 
+void matchAscii(gray) {
+
+}
+
 int main(int argc, char** argv) {
     std::cout << "harro :3\n";
 
@@ -14,13 +18,23 @@ int main(int argc, char** argv) {
         return -1;
     }
 
-    Mat frame { };
     while (1) {
-        if (!cap.read(frame)) {
-            break;
-        }
+        Mat frame;
+        cap >> frame;
 
+        if (frame.empty())
+            break;
+
+        Mat gray;
+        cvtColor(frame, gray, COLOR_BGR2GRAY);
+
+        imshow("demo", gray);
+
+        waitKey(0);
     }
+
+    cap.release();
+    destroyAllWindows();
 
     return 0;
 }
